@@ -1,0 +1,102 @@
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(135deg, #6d28d9, #14b8a6);
+}
+.navbar-brand, 
+.nav-link {
+  color: #fff !important;
+  font-weight: 600;
+}
+.nav-link:hover {
+  opacity: 0.85;
+}
+
+/* Profile Dropdown */
+.navbar .dropdown-toggle img {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #fff;
+}
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.dropdown-menu .dropdown-item:hover {
+  background: #f0fdfa;
+  color: #14b8a6;
+  font-weight: 500;
+}
+.dropdown-menu .dropdown-item.text-danger:hover {
+  background: #ffe6e6;
+  color: #dc3545;
+}
+
+/* Hero Section */
+.hero {
+  height: 90vh;
+  background: linear-gradient(135deg, #6d28d9, #14b8a6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+.btn-gradient {
+  background: white;
+  color: #14b8a6;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  background: #e6fffa;
+}
+
+/* Product Cards */
+.product-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+.product-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #6d28d9, #14b8a6);
+  color: white;
+}
+.footer .socials a {
+  color: white;
+  margin: 0 10px;
+  font-size: 1.2rem;
+  transition: opacity 0.3s;
+}
+.footer .socials a:hover {
+  opacity: 0.8;
+}
