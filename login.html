@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | YourBrand</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ===== Header (Brand + Home) ===== -->
+  <header class="login-header">
+    <a href="index.html" class="brand">YourBrand</a>
+    <a href="index.html" class="btn-home"><i class="bi bi-house-door"></i> Home</a>
+  </header>
+
+  <!-- ===== Hero Background ===== -->
+  <section class="hero-login">
+    <div class="hero-overlay"></div>
+
+    <!-- ===== Login Box ===== -->
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+      <p>Please log in to continue</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+
+      <div class="signup-link">
+        Don’t have an account? <a href="register.html">Register</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert('✅ Login successful!');
+          // Save user info in localStorage
+          localStorage.setItem('user', JSON.stringify(data.user));
+          window.location.href = 'index.html'; // redirect after login
+        } else {
+          alert('❌ ' + (data.error || 'Login failed'));
+        }
+      } catch (err) {
+        console.error(err);
+        alert('⚠️ Server error');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

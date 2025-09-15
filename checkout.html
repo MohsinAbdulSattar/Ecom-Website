@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - EcomStore</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">EcomStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            Cart
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                data-cart-count style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown ms-2">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            data-bs-toggle="dropdown">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle"
+                                width="30" height="30" alt="Profile">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="admin.html">Admin Dashboard</a></li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="login.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Content -->
+    <section class="container my-5">
+        <h2 class="mb-4">Checkout</h2>
+
+        <div class="row g-4">
+            <!-- Left: Shipping + Payment -->
+            <div class="col-lg-8">
+
+                <!-- Shipping -->
+                <div class="card p-3 mb-4" style="border-radius: 16px;">
+                    <h5 class="mb-3">Shipping Details</h5>
+                    <form id="checkout-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-control" name="address" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="city" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Postal Code</label>
+                                <input type="text" class="form-control" name="postal" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment -->
+                <div class="card p-3" style="border-radius: 16px;">
+                    <h5 class="mb-3">Payment</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="4111 1111 1111 1111">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Expiry</label>
+                            <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cardCVV" placeholder="123">
+                        </div>
+                        <div class="col-12">
+                            <small class="text-muted">This is a demo — no real payment is made.</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div class="col-lg-4">
+                <div class="card p-3" style="border-radius: 16px;">
+                    <h5 class="mb-3">Order Summary</h5>
+
+                    <div id="checkout-items" class="mb-3 small"></div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <strong id="co-subtotal">PKR 0</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping</span>
+                        <span id="co-shipping">PKR 0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Discount</span>
+                        <span id="co-discount">PKR 0</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-semibold">Total</span>
+                        <strong id="co-total">PKR 0</strong>
+                    </div>
+
+                    <!-- Promo -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="promoInput" placeholder="Promo code (optional)">
+                        <button class="btn btn-outline-dark" id="btn-apply-promo">Apply</button>
+                    </div>
+
+                    <button class="btn-gradient w-100" id="btn-place-order">Place Order</button>
+                    <small class="text-muted d-block mt-2">By placing your order, you agree to our Terms.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white text-center py-4">
+        <div class="container">
+            <p class="mb-2">&copy; 2025 EcomStore. All rights reserved.</p>
+            <div>
+                <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load your existing cart helpers first -->
+    <script src="js/cart.js"></script>
+    <!-- Checkout logic -->
+    <script src="js/checkout.js"></script>
+</body>
+
+</html>

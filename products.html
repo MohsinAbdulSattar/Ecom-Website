@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - EcomStore</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">EcomStore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item">
+            <a class="nav-link position-relative" href="cart.html">
+              Cart
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                data-cart-count style="display:none;">0</span>
+            </a>
+          </li>
+
+          <!-- User Menu (dynamic via navbar.js) -->
+          <li class="nav-item dropdown ms-2" id="userMenu">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle" width="30"
+                height="30" alt="Profile">
+              <span class="ms-2" id="userName">Guest</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" id="userDropdown">
+              <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Orders</a></li>
+              <li><a class="dropdown-item" href="admin.html">Admin Dashboard</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-danger" href="login.html" id="logoutBtn">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Hero Section -->
+  <section class="hero-small">
+    <video autoplay muted loop playsinline class="hero-bg">
+      <source src="assets/videos/hero-productss.mp4" type="video/mp4">
+      Your browser doesn’t support video.
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1 class="mb-3">Browse Our Products</h1>
+      <p class="lead mb-4">Find the best picks curated just for you</p>
+      <a href="#products" class="btn btn-gradient btn-lg shadow-sm">Shop Now</a>
+    </div>
+  </section>
+
+
+  <!-- Filter Navbar -->
+  <!-- Filter Navbar -->
+  <section class="filter-bar py-3 bg-light border-top border-bottom">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <!-- Category Pills -->
+      <ul class="nav nav-pills flex-wrap" id="categoryPills">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-category-pill data-category="All">All</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-category-pill data-category="Men">Men</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-category-pill data-category="Women">Women</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-category-pill data-category="Kids">Kids</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-category-pill data-category="Accessories">Accessories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-category-pill data-category="Electronics">Electronics</a>
+        </li>
+      </ul>
+
+      <!-- Search -->
+      <form class="d-flex ms-auto" id="productSearchForm" onsubmit="return false;" style="max-width: 320px;">
+        <input id="productSearch" class="form-control form-control-sm me-2" type="search" placeholder="Search products…"
+          aria-label="Search">
+        <button class="btn btn-gradient btn-sm" type="button" id="searchBtn">Search</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- Products Section -->
+  <section class="container my-5" id="products">
+    <div class="row g-4">
+
+
+      <div id="noResults" class="text-center py-5 d-none">
+        <h5>No products match your filters.</h5>
+        <p class="text-muted mb-0">Try a different category or search term.</p>
+      </div>
+
+    </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-white text-center py-4">
+    <div class="container">
+      <p class="mb-2">&copy; 2025 EcomStore. All rights reserved.</p>
+      <div>
+        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/cart.js"></script>
+
+  <script>
+    // =========================
+    // Filter + Search
+    // =========================
+    const pills = document.querySelectorAll('[data-category-pill]');
+    const searchInput = document.getElementById('productSearch');
+    const searchBtn = document.getElementById('searchBtn');
+    const noResults = document.getElementById('noResults');
+    let activeCategory = 'All';
+
+    function applyFilters() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+      const items = Array.from(document.querySelectorAll('.product-item'));
+      let visible = 0;
+
+      items.forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const cat = card.dataset.category || 'All';
+
+        const matchesText = q === '' || name.includes(q);
+        const matchesCat = activeCategory === 'All' || cat === activeCategory;
+
+        const show = matchesText && matchesCat;
+        card.classList.toggle('d-none', !show);
+        if (show) visible++;
+      });
+
+      noResults.classList.toggle('d-none', visible !== 0);
+    }
+
+    // Category pill clicks
+    pills.forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = pill.dataset.category;
+        applyFilters();
+      });
+    });
+
+    // Search
+    searchInput.addEventListener('input', applyFilters);
+    searchBtn.addEventListener('click', applyFilters);
+
+    // Prevent form submit/page reload on Enter
+    document.getElementById('productSearchForm').addEventListener('submit', (e) => e.preventDefault());
+
+    // =========================
+    // Load Products from API
+    // =========================
+    async function loadProducts() {
+      try {
+        const res = await fetch('http://localhost:5000/api/products');
+        const products = await res.json();
+
+        const container = document.querySelector('#products .row');
+        container.innerHTML = '';
+
+        if (products.length === 0) {
+          container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <h5>No products found.</h5>
+          <p class="text-muted">Add some from the admin panel.</p>
+        </div>`;
+          return;
+        }
+
+        products.forEach(p => {
+          container.innerHTML += `
+        <div class="col-md-4 product-item" data-category="${p.category}" data-name="${p.name}">
+          <div class="card product-card">
+            <img src="${p.image_url}" class="card-img-top" alt="${p.name}">
+            <div class="card-body text-center">
+              <h5 class="card-title">${p.name}</h5>
+              <p class="card-text">PKR ${p.price}</p>
+              <button class="btn-gradient btn-add-to-cart" 
+                data-id="sku-${p.id}" 
+                data-name="${p.name}" 
+                data-price="${p.price}" 
+                data-image="${p.image_url}">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>`;
+        });
+
+        // ✅ Re-run filters so search + pills still work
+        applyFilters();
+
+      } catch (err) {
+        console.error("Error loading products:", err);
+      }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', loadProducts);
+
+  </script>
+
+  <script src="js/navbar.js"></script>
+
+
+
+
+
+</body>
+
+</html>
