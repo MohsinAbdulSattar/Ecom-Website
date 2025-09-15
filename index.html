@@ -1,113 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcomStore - Your Fashion Hub</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcomStore - Your Fashion Hub</title>
 
-  <!-- Font Awesome (for icons) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">EcomStore</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
-          <!-- Profile Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://via.placeholder.com/40" class="rounded-circle me-1" alt="Profile">
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-              <li><h6 class="dropdown-header">Logged in as Mohsin</h6></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Orders</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">EcomStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            Cart
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                data-cart-count style="display:none;">0</span>
+                        </a>
+                    </li>
 
-  <!-- Hero Section -->
-  <header class="hero text-center">
-    <div class="container">
-      <h1 class="fw-bold">Discover the Latest Trends</h1>
-      <p class="lead">Your one-stop shop for modern, stylish fashion</p>
-      <a href="#" class="btn btn-gradient btn-lg">Shop Now</a>
-    </div>
-  </header>
-
-  <!-- Hot Selling Items -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4">🔥 Hot Selling Items</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Product 1">
-          <div class="card-body text-center">
-            <h5 class="card-title">Trendy Jacket</h5>
-            <p class="card-text">$49.99</p>
-            <button class="btn btn-gradient btn-sm">Add to Cart</button>
-          </div>
+                    <!-- User Menu (dynamic via navbar.js) -->
+                    <li class="nav-item dropdown ms-2" id="userMenu">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            data-bs-toggle="dropdown">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle"
+                                width="30" height="30" alt="Profile">
+                            <span class="ms-2" id="userName">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" id="userDropdown">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="admin.html">Admin Dashboard</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="login.html" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Product 2">
-          <div class="card-body text-center">
-            <h5 class="card-title">Summer Dress</h5>
-            <p class="card-text">$39.99</p>
-            <button class="btn btn-gradient btn-sm">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Product 3">
-          <div class="card-body text-center">
-            <h5 class="card-title">Sneakers</h5>
-            <p class="card-text">$59.99</p>
-            <button class="btn btn-gradient btn-sm">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Footer -->
-  <footer class="footer text-center py-4">
-    <div class="container">
-      <p class="mb-2">&copy; 2025 EcomStore. All rights reserved.</p>
-      <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-bg">
+            <source src="assets/videos/hero-fashion.mp4.mp4" type="video/mp4">
+            Your browser doesn’t support video.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Luxury Fashion Collection</h1>
+            <p>Discover elegance and modern style crafted for you.</p>
+            <a href="products.html" class="btn btn-gradient">Shop Now</a>
+        </div>
+    </section>
+
+
+
+    <!-- Hot Selling Items -->
+    <!-- Hot Selling Items -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">🔥 Hot Selling Items</h2>
+        <div class="row g-4" id="hot-products">
+            <!-- Products will load here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            <p class="mb-2">&copy; 2025 EcomStore. All rights reserved.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('http://localhost:5000/api/hot-products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('hot-products');
+                container.innerHTML = '';
+
+                if (products.length === 0) {
+                    container.innerHTML = `<p class="text-center text-muted">No hot products right now.</p>`;
+                }
+
+                products.forEach(p => {
+                    container.innerHTML += `
+          <div class="col-md-4 product-item">
+            <div class="card product-card">
+              <img src="${p.image_url}" class="card-img-top" alt="${p.name}">
+              <div class="card-body text-center">
+                <h5 class="card-title">${p.name}</h5>
+                <p class="card-text">PKR ${p.price}</p>
+                <button class="btn-gradient btn-add-to-cart" 
+                  data-id="sku-${p.id}" 
+                  data-name="${p.name}" 
+                  data-price="${p.price}" 
+                  data-image="${p.image_url}">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>`;
+                });
+            })
+            .catch(err => console.error('Error loading hot products:', err));
+    </script>
+    <script src="js/navbar.js"></script>
+
+
+
 </body>
+
 </html>
