@@ -16,10 +16,10 @@
     <div class="hero-overlay"></div>
 
     <!-- Header -->
-    <div class="login-header">
-      <a href="index.html" class="brand">ShopEase</a>
-      <a href="index.html" class="btn-home">← Back to Home</a>
-    </div>
+    <header class="login-header">
+    <a href="index.html" class="brand">EcomStore</a>
+    <a href="index.html" class="btn-home"><i class="bi bi-house-door"></i> Home</a>
+    </header>
 
     <!-- Register Box -->
     <div class="register-box">
@@ -69,11 +69,21 @@
         const data = await res.json();
 
         if (data.success) {
-          alert('✅ Registration successful! Please login.');
-          window.location.href = 'login.html';
+          alert('✅ Registration successful!');
+
+          // Auto-login: save user to localStorage
+          localStorage.setItem('user', JSON.stringify({
+            id: data.id || null,   // optional, in case you want to store ID later
+            name: name,
+            email: email
+          }));
+
+          // Redirect to homepage
+          window.location.href = 'index.html';
         } else {
           alert('❌ ' + (data.error || 'Registration failed'));
         }
+
       } catch (err) {
         console.error(err);
         alert('⚠️ Server error');
