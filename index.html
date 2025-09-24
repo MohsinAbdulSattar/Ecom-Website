@@ -127,13 +127,15 @@
               <div class="card-body text-center">
                 <h5 class="card-title">${p.name}</h5>
                 <p class="card-text">PKR ${p.price}</p>
-                <button class="btn-gradient btn-add-to-cart" 
-                  data-id="sku-${p.id}" 
-                  data-name="${p.name}" 
-                  data-price="${p.price}" 
-                  data-image="${p.image_url}">
-                  Add to Cart
-                </button>
+                <button class="btn-gradient btn-add-to-cart"
+                data-id="${p.id}" 
+                data-name="${p.name}" 
+                data-price="${p.price}" 
+                data-image="${p.image_url}" 
+                data-qty="${p.quantity}" 
+            ${p.quantity <= 0 ? "disabled" : ""}>
+            ${p.quantity <= 0 ? "Out of Stock" : "Add to Cart"}
+            </button>
               </div>
             </div>
           </div>`;
