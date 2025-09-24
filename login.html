@@ -2,76 +2,150 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | YourBrand</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcomStore - Your Fashion Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- ===== Header (Brand + Home) ===== -->
-  <header class="login-header">
-    <a href="index.html" class="brand">YourBrand</a>
-    <a href="index.html" class="btn-home"><i class="bi bi-house-door"></i> Home</a>
-  </header>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">EcomStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            Cart
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                data-cart-count style="display:none;">0</span>
+                        </a>
+                    </li>
 
-  <!-- ===== Hero Background ===== -->
-  <section class="hero-login">
-    <div class="hero-overlay"></div>
-
-    <!-- ===== Login Box ===== -->
-    <div class="login-box">
-      <h2>Welcome Back</h2>
-      <p>Please log in to continue</p>
-
-      <form id="loginForm">
-        <div class="form-group">
-          <input type="email" id="email" placeholder="Email" required>
+                    <!-- User Menu (dynamic via navbar.js) -->
+                    <li class="nav-item dropdown ms-2" id="userMenu">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                            data-bs-toggle="dropdown">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle"
+                                width="30" height="30" alt="Profile">
+                            <span class="ms-2" id="userName">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" id="userDropdown">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="admin.html">Admin Dashboard</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="login.html" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="form-group">
-          <input type="password" id="password" placeholder="Password" required>
+    </nav>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-bg">
+            <source src="assets/videos/hero-fashion.mp4.mp4" type="video/mp4">
+            Your browser doesn’t support video.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Luxury Fashion Collection</h1>
+            <p>Discover elegance and modern style crafted for you.</p>
+            <a href="products.html" class="btn btn-gradient">Shop Now</a>
         </div>
-        <button type="submit" class="btn-login">Login</button>
-      </form>
+    </section>
 
-      <div class="signup-link">
-        Don’t have an account? <a href="register.html">Register</a>
-      </div>
-    </div>
-  </section>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+    <!-- Hot Selling Items -->
+    <!-- Hot Selling Items -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">🔥 Hot Selling Items</h2>
+        <div class="row g-4" id="hot-products">
+            <!-- Products will load here -->
+        </div>
+    </section>
 
-      try {
-        const res = await fetch('http://localhost:5000/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+    <!-- Footer -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            <p class="mb-2">&copy; 2025 EcomStore. All rights reserved.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
 
-        const data = await res.json();
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('http://localhost:5000/api/hot-products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('hot-products');
+                container.innerHTML = '';
 
-        if (data.success) {
-          alert('✅ Login successful!');
-          // Save user info in localStorage
-          localStorage.setItem('user', JSON.stringify(data.user));
-          window.location.href = 'index.html'; // redirect after login
-        } else {
-          alert('❌ ' + (data.error || 'Login failed'));
-        }
-      } catch (err) {
-        console.error(err);
-        alert('⚠️ Server error');
-      }
-    });
-  </script>
+                if (products.length === 0) {
+                    container.innerHTML = `<p class="text-center text-muted">No hot products right now.</p>`;
+                }
+
+                products.forEach(p => {
+                    container.innerHTML += `
+          <div class="col-md-4 product-item">
+            <div class="card product-card">
+              <img src="${p.image_url}" class="card-img-top" alt="${p.name}">
+              <div class="card-body text-center">
+                <h5 class="card-title">${p.name}</h5>
+                <p class="card-text">PKR ${p.price}</p>
+                <button class="btn-gradient btn-add-to-cart"
+                data-id="${p.id}" 
+                data-name="${p.name}" 
+                data-price="${p.price}" 
+                data-image="${p.image_url}" 
+                data-qty="${p.quantity}" 
+            ${p.quantity <= 0 ? "disabled" : ""}>
+            ${p.quantity <= 0 ? "Out of Stock" : "Add to Cart"}
+            </button>
+              </div>
+            </div>
+          </div>`;
+                });
+            })
+            .catch(err => console.error('Error loading hot products:', err));
+    </script>
+    <script src="js/navbar.js"></script>
+
+
 
 </body>
 
