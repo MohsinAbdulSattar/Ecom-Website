@@ -35,10 +35,12 @@ function addToCart(item) {
     if (idx > -1) {
         cart[idx].qty += 1;
     } else {
-        cart.push({ ...item, qty: 1 });
+        cart.push({ ...item, qty: 1, maxQty: item.maxQty || item.quantity || 0 });
     }
+
     saveCart(cart);
     inform(`Added: ${item.name}`);
+    // showToast(`✅ Added: ${item.name}`, "success");
     updateCartBadge();
 }
 
@@ -51,16 +53,36 @@ function removeFromCart(id) {
 }
 
 // Update qty (by id)
+// Update qty (by id)
 function setQty(id, qty) {
     const cart = getCart();
     const idx = cart.findIndex(p => p.id === id);
+
     if (idx > -1) {
-        cart[idx].qty = Math.max(1, qty);
+        const item = cart[idx];
+        const maxQty = parseInt(item.maxQty || item.quantity || 0, 10);
+
+        // 🔍 DEBUG: see what's going on
+        console.log('[setQty] id=', id, 'requested=', qty, 'current=', item.qty, 'maxQty=', maxQty, 'item=', item);
+
+        if (qty < 1) {
+            qty = 1; // never negative or zero
+        }
+        if (maxQty > 0 && qty > maxQty) {
+            alert("⚠️ Stock limit reached!");
+            qty = maxQty;
+        }
+
+        cart[idx].qty = qty;
         saveCart(cart);
         renderCartTable();
         updateCartBadge();
+    } else {
+        console.warn('[setQty] Item not found in cart for id:', id, getCart());
     }
 }
+
+
 
 // Clear cart
 function clearCart() {
@@ -102,6 +124,7 @@ function updateCartBadge() {
 }
 
 // Hook "Add to Cart" buttons (on products page)
+// Hook "Add to Cart" buttons (on products page) with stock check
 document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-add-to-cart');
     if (!btn) return;
@@ -110,9 +133,31 @@ document.addEventListener('click', (e) => {
     const name = btn.dataset.name;
     const price = parseInt(btn.dataset.price, 10) || 0;
     const image = btn.dataset.image || '';
+    const maxQty = parseInt(btn.dataset.qty, 10) || 0; // <-- from products.html
 
-    addToCart({ id, name, price, image });
+    let cart = getCart();
+    let item = cart.find(p => p.id === id);
+
+    if (item) {
+        if (item.qty >= item.maxQty) {   // use item.maxQty
+            alert("⚠️ Not enough stock available!");
+            return;
+        }
+        item.qty++;
+    } else {
+        if (maxQty <= 0) {
+            alert("⚠️ Item is out of stock!");
+            return;
+        }
+        cart.push({ id, name, price, image, qty: 1, maxQty });
+    }
+
+    saveCart(cart);
+    inform(`Added: ${name}`);
+    // showToast(`✅ Added: ${name}`, "success");
+    updateCartBadge();
 });
+
 
 // ===== Cart page rendering (cart.html) =====
 function renderCartTable() {
@@ -181,8 +226,21 @@ document.addEventListener('click', (e) => {
         const id = e.target.dataset.id;
         const cart = getCart();
         const it = cart.find(p => p.id === id);
-        if (it) setQty(id, it.qty + 1);
+
+        if (it) {
+            const maxQty = parseInt(it.maxQty || it.quantity || 0, 10);
+            console.log('[inc-click]', { id, currentQty: it.qty, maxQty, item: it }); // 🔍
+            if (maxQty && (it.qty + 1) > maxQty) {
+                alert(`⚠️ Only ${maxQty} in stock!`);
+                // showToast({ title: 'Stock limit', message: 'Not enough stock available', variant: 'warn' });
+                return;
+            }
+            setQty(id, it.qty + 1);
+        }
     }
+
+
+
 
     if (e.target.matches('.btn-qty-dec')) {
         const id = e.target.dataset.id;
@@ -198,6 +256,45 @@ document.addEventListener('click', (e) => {
 
     if (e.target.matches('#btn-clear-cart')) {
         clearCart();
+    }
+});
+// Handle manual qty input in cart
+document.addEventListener('input', (e) => {
+    if (e.target.matches('.qty-input')) {
+        const id = e.target.dataset.id;
+        const raw = parseInt(e.target.value, 10);
+        const cart = getCart();
+        const it = cart.find(p => p.id === id);
+        if (!it) return;
+
+        const maxQty = parseInt(it.maxQty || it.quantity || 0, 10);
+        let qty = isNaN(raw) ? 1 : raw;
+        if (qty < 1) qty = 1;
+        if (maxQty > 0 && qty > maxQty) qty = maxQty;
+
+        // Update field immediately for UX
+        e.target.value = qty;
+
+        // Update cart
+        setQty(id, qty);
+    }
+});
+
+document.addEventListener('change', (e) => {
+    if (e.target.matches('.qty-input')) {
+        const id = e.target.dataset.id;
+        const raw = parseInt(e.target.value, 10);
+        const cart = getCart();
+        const it = cart.find(p => p.id === id);
+        if (!it) return;
+
+        const maxQty = parseInt(it.maxQty || it.quantity || 0, 10);
+        let qty = isNaN(raw) ? 1 : raw;
+        if (qty < 1) qty = 1;
+        if (maxQty > 0 && qty > maxQty) qty = maxQty;
+
+        e.target.value = qty;
+        setQty(id, qty);
     }
 });
 
